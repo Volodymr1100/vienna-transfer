@@ -219,22 +219,6 @@
             background-color: var(--accent-hover);
         }
 
-        .secondary-btn {
-            display: block;
-            width: 100%;
-            background-color: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            text-decoration: none;
-            padding: 13px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-
-        /* Interactive Calculator & Booking Form Styles */
         .interactive-section {
             width: 100%;
             max-width: 480px;
@@ -257,4 +241,326 @@
         }
 
         .form-group label {
-            display:
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .calc-result {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--input-bg);
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .calc-price {
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+
+        .gallery {
+            width: 100%;
+            max-width: 480px;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            object-fit: cover;
+            height: 240px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-block">
+            VIENNA
+            <span>TRANSFER</span>
+        </div>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLang('de', event)">DE</button>
+                <button class="lang-btn" onclick="setLang('en', event)">EN</button>
+                <button class="lang-btn" onclick="setLang('ru', event)">RU</button>
+            </div>
+            <button class="icon-btn" onclick="toggleTheme()" title="Theme">☀️</button>
+            <a href="tel:+4368181534660" class="phone-badge">📞 Call</a>
+        </div>
+    </div>
+
+    <div class="hero-card">
+        <h1 id="hero-title">VIP Transfer Wien</h1>
+        <p id="hero-desc">Schnelle und komfortable Fahrten in Wien & Umgebung mit Tesla Model Y.</p>
+        
+        <div class="features-grid">
+            <div class="feature-item">
+                <span>🧳 5 Koffer</span>
+                <small id="f-luggage">Max Kapazität</small>
+            </div>
+            <div class="feature-item">
+                <span>⚡ Tesla Y</span>
+                <small id="f-car">100% Elektro</small>
+            </div>
+            <div class="feature-item">
+                <span>⭐ VIP</span>
+                <small id="f-service">Top Service</small>
+            </div>
+        </div>
+
+        <a href="https://wa.me/4368181534660" class="card-btn" id="btn-wa-main">In WhatsApp schreiben</a>
+    </div>
+
+    <div class="card">
+        <h3 id="t1-title">Flughafentransfer</h3>
+        <div class="price-amount">85 €</div>
+        <div class="price-sub" id="t1-sub">Flughafen Wien ⇄ Wien Stadt</div>
+        <a href="https://wa.me/4368181534660?text=Flughafentransfer%20buchen" class="card-btn" id="btn-b1">Via WhatsApp Buchen</a>
+    </div>
+
+    <div class="card">
+        <h3 id="t2-title">Stundenweise Miete</h3>
+        <div class="price-amount">90 €</div>
+        <div class="price-sub" id="t2-sub">pro Stunde (Chauffeur inklusive)</div>
+        <a href="https://wa.me/4368181534660?text=Stundenweise%20Miete%20anfragen" class="card-btn" id="btn-b2">Via WhatsApp Buchen</a>
+    </div>
+
+    <div class="card">
+        <h3 id="t3-title">Fernfahrten</h3>
+        <div class="price-amount">ab 190 €</div>
+        <div class="price-sub" id="t3-sub">Bratislava 190€ | Budapest 490€ | Salzburg 590€</div>
+        <a href="https://wa.me/4368181534660?text=Fernfahrt%20anfragen" class="card-btn" id="btn-b3">Via WhatsApp Buchen</a>
+    </div>
+
+    <div class="interactive-section">
+        <h3 id="calc-header">🧮 Schnell-Kalkulator</h3>
+        <div class="form-group">
+            <label id="lbl-route">Wählen Sie die Route:</label>
+            <select id="routeSelect" class="form-control" onchange="updateCalculation()">
+                <option value="85">Flughafen Wien ⇄ Wien Stadt (85 €)</option>
+                <option value="90">Stundenmiete / 1 Stunde (90 €)</option>
+                <option value="190">Wien ➔ Bratislava (190 €)</option>
+                <option value="490">Wien ➔ Budapest (490 €)</option>
+                <option value="590">Wien ➔ Salzburg (590 €)</option>
+            </select>
+        </div>
+        <div class="calc-result">
+            <span id="txt-est">Geschätzter Preis:</span>
+            <span id="calcPrice" class="calc-price">85 €</span>
+        </div>
+        <button class="card-btn" onclick="bookCalculatedTrip()" id="btn-calc-order">Bereitschaft anfragen via WhatsApp</button>
+    </div>
+
+    <div class="interactive-section">
+        <h3 id="book-header">📅 Online Vorbestellung</h3>
+        <div class="form-group">
+            <label id="lbl-name">Ihr Name:</label>
+            <input type="text" id="clientName" class="form-control" placeholder="Max Mustermann">
+        </div>
+        <div class="form-group">
+            <label id="lbl-date">Datum & Uhrzeit:</label>
+            <input type="datetime-local" id="clientDateTime" class="form-control">
+        </div>
+        <div class="form-group">
+            <label id="lbl-details">Route / Bemerkung:</label>
+            <input type="text" id="clientDetails" class="form-control" placeholder="z.B. Hotel Sacher zum Flughafen">
+        </div>
+        <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
+    </div>
+
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80" alt="Tesla Model Y exterior">
+        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="Tesla interior">
+        <img src="https://images.unsplash.com/photo-1536700503339-1e4b06520771?auto=format&fit=crop&w=800&q=80" alt="Tesla luxury view">
+        <img src="https://images.unsplash.com/photo-1571127236352-6ac2a1753bcc?auto=format&fit=crop&w=800&q=80" alt="Tesla modern design">
+        <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde99?auto=format&fit=crop&w=800&q=80" alt="Tesla rear view">
+    </div>
+
+    <footer>
+        &copy; 2026 VIENNA TRANSFER | vienna.transfer.vip@gmail.com
+    </footer>
+
+    <script>
+        const dict = {
+            de: {
+                title: "VIP Transfer Wien",
+                desc: "Schnelle und komfortable Fahrten in Wien & Umgebung mit Tesla Model Y.",
+                luggage: "Max Kapazität",
+                car: "100% Elektro",
+                service: "Top Service",
+                waMain: "In WhatsApp schreiben",
+                t1Title: "Flughafentransfer",
+                t1Sub: "Flughafen Wien ⇄ Wien Stadt",
+                t2Title: "Stundenweise Miete",
+                t2Sub: "pro Stunde (Chauffeur inklusive)",
+                t3Title: "Fernfahrten",
+                t3Sub: "Bratislava 190€ | Budapest 490€ | Salzburg 590€",
+                book: "Via WhatsApp Buchen",
+                calcHeader: "🧮 Schnell-Kalkulator",
+                lblRoute: "Wählen Sie die Route:",
+                txtEst: "Geschätzter Preis:",
+                btnCalc: "Bereitschaft anfragen via WhatsApp",
+                bookHeader: "📅 Online Vorbestellung",
+                lblName: "Ihr Name:",
+                lblDate: "Datum & Uhrzeit:",
+                lblDetails: "Route / Bemerkung:",
+                btnFormOrder: "Jetzt verbindlich anfragen"
+            },
+            en: {
+                title: "VIP Transfer Vienna",
+                desc: "Fast and comfortable rides in Vienna & surroundings with Tesla Model Y.",
+                luggage: "Max Capacity",
+                car: "100% Electric",
+                service: "Top Service",
+                waMain: "Write on WhatsApp",
+                t1Title: "Airport Transfer",
+                t1Sub: "Vienna Airport ⇄ Vienna City",
+                t2Title: "Hourly Rental",
+                t2Sub: "per hour (Chauffeur included)",
+                t3Title: "Long Distance",
+                t3Sub: "Bratislava €190 | Budapest €490 | Salzburg €590",
+                book: "Book via WhatsApp",
+                calcHeader: "🧮 Quick Calculator",
+                lblRoute: "Select Route:",
+                txtEst: "Estimated Price:",
+                btnCalc: "Request via WhatsApp",
+                bookHeader: "📅 Online Booking",
+                lblName: "Your Name:",
+                lblDate: "Date & Time:",
+                lblDetails: "Route / Details:",
+                btnFormOrder: "Send Booking Request"
+            },
+            ru: {
+                title: "VIP Трансфер Вена",
+                desc: "Быстрые и комфортные поездки по Венам и окрестностям на Tesla Model Y.",
+                luggage: "Вместимость",
+                car: "100% Электро",
+                service: "Премиум сервис",
+                waMain: "Написать в WhatsApp",
+                t1Title: "Трансфер в аэропорт",
+                t1Sub: "Аэропорт Вена ⇄ Город Вена",
+                t2Title: "Почасовая аренда",
+                t2Sub: "в час (с водителем)",
+                t3Title: "Междугородние поездки",
+                t3Sub: "Братислава 190€ | Будапешт 490€ | Зальцбург 590€",
+                book: "Заказать в WhatsApp",
+                calcHeader: "🧮 Калькулятор поездки",
+                lblRoute: "Выберите маршрут:",
+                txtEst: "Ориентировочная цена:",
+                btnCalc: "Запросить в WhatsApp",
+                bookHeader: "📅 Онлайн бронирование",
+                lblName: "Ваше имя:",
+                lblDate: "Дата и время:",
+                lblDetails: "Маршрут / Детали:",
+                btnFormOrder: "Отправить заказ"
+            }
+        };
+
+        let currentLang = 'de';
+
+        function setLang(lang, e) {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            if(e) e.target.classList.add('active');
+            currentLang = lang;
+            const d = dict[lang];
+
+            document.getElementById('hero-title').innerText = d.title;
+            document.getElementById('hero-desc').innerText = d.desc;
+            document.getElementById('f-luggage').innerText = d.luggage;
+            document.getElementById('f-car').innerText = d.car;
+            document.getElementById('f-service').innerText = d.service;
+            document.getElementById('btn-wa-main').innerText = d.waMain;
+
+            document.getElementById('t1-title').innerText = d.t1Title;
+            document.getElementById('t1-sub').innerText = d.t1Sub;
+            document.getElementById('t2-title').innerText = d.t2Title;
+            document.getElementById('t2-sub').innerText = d.t2Sub;
+            document.getElementById('t3-title').innerText = d.t3Title;
+            document.getElementById('t3-sub').innerText = d.t3Sub;
+
+            document.querySelectorAll('.card-btn:not(#btn-wa-main):not(#btn-calc-order):not(#btn-form-order)').forEach(b => {
+                b.innerText = d.book;
+            });
+
+            document.getElementById('calc-header').innerText = d.calcHeader;
+            document.getElementById('lbl-route').innerText = d.lblRoute;
+            document.getElementById('txt-est').innerText = d.txtEst;
+            document.getElementById('btn-calc-order').innerText = d.btnCalc;
+
+            document.getElementById('book-header').innerText = d.bookHeader;
+            document.getElementById('lbl-name').innerText = d.lblName;
+            document.getElementById('lbl-date').innerText = d.lblDate;
+            document.getElementById('lbl-details').innerText = d.lblDetails;
+            document.getElementById('btn-form-order').innerText = d.btnFormOrder;
+
+            document.documentElement.lang = lang;
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.querySelector('.icon-btn');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                btn.innerText = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerText = '☀️';
+            }
+        }
+
+        function updateCalculation() {
+            const select = document.getElementById('routeSelect');
+            const price = select.value;
+            document.getElementById('calcPrice').innerText = price + ' €';
+        }
+
+        function bookCalculatedTrip() {
+            const select = document.getElementById('routeSelect');
+            const text = select.options[select.selectedIndex].text;
+            const price = select.value;
+            const msg = encodeURIComponent(`Hallo! Ich möchte buchen: ${text} zum Preis von ${price}€.`);
+            window.location.href = `https://wa.me/4368181534660?text=${msg}`;
+        }
+
+        function submitBookingForm() {
+            const name = document.getElementById('clientName').value || 'Unbekannt';
+            const dt = document.getElementById('clientDateTime').value || 'Bald';
+            const details = document.getElementById('clientDetails').value || 'Standard';
+
+            const msg = encodeURIComponent(`Neue Buchung!\nName: ${name}\nWann: ${dt}\nDetails: ${details}`);
+            window.location.href = `https://wa.me/4368181534660?text=${msg}`;
+        }
+    </script>
+</body>
+</html>
