@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vienna Transfer — VIP Tesla Service</title>
+    <title>Vienna Transfer — VIP Tesla Model Y Service</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
+        :root[data-theme="dark"] {
             --bg-color: #0b0b0b;
             --card-bg: #141414;
+            --card-hover: #1c1c1c;
             --text-main: #ffffff;
             --text-muted: #888888;
             --accent: #25d366;
+            --accent-hover: #20ba5a;
             --border: #222222;
+            --input-bg: #1a1a1a;
+        }
+
+        :root[data-theme="light"] {
+            --bg-color: #f4f4f6;
+            --card-bg: #ffffff;
+            --card-hover: #f9f9f9;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent: #00a844;
+            --accent-hover: #008f3b;
+            --border: #dddddd;
+            --input-bg: #eeeeee;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -37,7 +53,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding: 0 5px;
         }
 
@@ -57,16 +73,29 @@
 
         .header-right {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            align-items: center;
             gap: 8px;
+        }
+
+        .icon-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
         }
 
         .phone-badge {
             border: 1px solid var(--border);
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 12px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-main);
             text-decoration: none;
@@ -75,15 +104,15 @@
 
         .lang-switcher {
             display: flex;
-            gap: 5px;
+            gap: 4px;
         }
 
         .lang-btn {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 6px 8px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.75rem;
             font-weight: 600;
@@ -92,30 +121,54 @@
         .lang-btn.active {
             border-color: var(--text-main);
             color: var(--text-main);
+            background: var(--card-bg);
         }
 
         .hero-card {
             width: 100%;
             max-width: 480px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80') center/cover;
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 40px 20px;
+            padding: 35px 20px;
             text-align: center;
             margin-bottom: 20px;
+            color: #ffffff;
         }
 
         .hero-card h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 10px;
         }
 
         .hero-card p {
-            color: #cccccc;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
+            color: #dddddd;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
             line-height: 1.4;
+        }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            font-size: 0.75rem;
+            color: #cccccc;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .feature-item span {
+            font-weight: 600;
+            color: #ffffff;
         }
 
         .card {
@@ -124,26 +177,26 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
             margin-bottom: 20px;
         }
 
         .card h3 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .price-amount {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .price-sub {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 20px;
         }
 
@@ -157,89 +210,51 @@
             border-radius: 12px;
             font-weight: 600;
             font-size: 0.95rem;
-            transition: opacity 0.2s;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
 
         .card-btn:hover {
-            opacity: 0.9;
+            background-color: var(--accent-hover);
         }
 
         .secondary-btn {
             display: block;
             width: 100%;
-            background-color: var(--text-main);
-            color: #000000;
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
             text-decoration: none;
-            padding: 14px;
+            padding: 13px;
             border-radius: 12px;
             font-weight: 600;
             font-size: 0.95rem;
             margin-top: 10px;
+            cursor: pointer;
         }
 
-        .gallery {
+        /* Interactive Calculator & Booking Form Styles */
+        .interactive-section {
             width: 100%;
             max-width: 480px;
-            margin-top: 10px;
-            margin-bottom: 30px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .gallery img {
-            width: 100%;
-            border-radius: 16px;
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            object-fit: cover;
-            height: 240px;
-        }
-
-        footer {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
+            border-radius: 20px;
+            padding: 25px 20px;
             margin-bottom: 20px;
-            line-height: 1.5;
         }
-    </style>
-</head>
-<body>
 
-    <div class="header">
-        <div class="logo-block">
-            VIENNA
-            <span>TRANSFER</span>
-        </div>
-        <div class="header-right">
-            <div class="lang-switcher">
-                <button class="lang-btn active" onclick="setLang('de', event)">DE</button>
-                <button class="lang-btn" onclick="setLang('en', event)">EN</button>
-                <button class="lang-btn" onclick="setLang('ru', event)">RU</button>
-            </div>
-            <a href="tel:+4368181534660" class="phone-badge">+43 681 81534660</a>
-        </div>
-    </div>
+        .interactive-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
 
-    <div class="hero-card">
-        <h1 id="hero-title">VIP Transfer Wien</h1>
-        <p id="hero-desc">Schnelle und komfortable Fahrten in Wien & Umgebung mit Tesla Model Y (bis zu 5 Koffer).</p>
-        <a href="https://wa.me/4368181534660" class="card-btn" id="btn-wa-main">In WhatsApp schreiben</a>
-        <a href="tel:+4368181534660" class="secondary-btn" id="btn-call">Anrufen</a>
-    </div>
+        .form-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
 
-    <div class="card">
-        <h3 id="t1-title">Flughafentransfer</h3>
-        <div class="price-amount">ab 85 €</div>
-        <div class="price-sub" id="t1-sub">Flughafen Wien ⇄ Wien Stadt</div>
-        <a href="https://wa.me/4368181534660?text=Flughafentransfer%20buchen" class="card-btn" id="btn-b1">Via WhatsApp Buchen</a>
-    </div>
-
-    <div class="card">
-        <h3 id="t2-title">Stundenweise Miete</h3>
-        <div class="price-amount">ab 90 €</div>
-        <div class="price-sub" id="t2-sub">pro Stunde</div>
-        <a href="https://wa.me/4368181534660?text=Stundenweise%20Miete%20anfragen" class="card-btn" id="btn-b2">Via WhatsApp Buchen</a>
-    </div>
-
-    <div class="car
+        .form-group label {
+            display:
