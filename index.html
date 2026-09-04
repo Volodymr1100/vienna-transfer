@@ -9,7 +9,6 @@
         :root[data-theme="dark"] {
             --bg-color: #0b0b0b;
             --card-bg: #141414;
-            --card-hover: #1c1c1c;
             --text-main: #ffffff;
             --text-muted: #888888;
             --accent: #25d366;
@@ -21,7 +20,6 @@
         :root[data-theme="light"] {
             --bg-color: #f4f4f6;
             --card-bg: #ffffff;
-            --card-hover: #f9f9f9;
             --text-main: #111111;
             --text-muted: #666666;
             --accent: #00a844;
@@ -212,7 +210,6 @@
             font-size: 0.95rem;
             border: none;
             cursor: pointer;
-            transition: background-color 0.2s;
         }
 
         .card-btn:hover {
@@ -317,26 +314,11 @@
             background: #000;
         }
 
-        .car-slider {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            overflow-x: scroll;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .car-slider::-webkit-scrollbar {
-            display: none;
-        }
-
         .car-slide-img {
-            flex: 0 0 100%;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            scroll-snap-align: start;
+            display: block;
         }
 
         .car-label {
@@ -359,18 +341,18 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             color: #fff;
             border: 1px solid rgba(255,255,255,0.2);
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 10;
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
 
         .slider-btn.prev { left: 10px; }
@@ -518,7 +500,7 @@
         <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
     </div>
 
-    <!-- 100% разделенный автопарк без пересечений (ровно 4 уникальных фото на каждую машину) -->
+    <!-- Жестко изолированные слайдеры с уникальными массивами фото для каждой машины -->
     <div class="fleet-section" id="fuhrpark">
         <div class="fleet-header">
             <h3>UNSER FUHRPARK</h3>
@@ -526,17 +508,12 @@
         </div>
 
         <div class="fleet-grid">
-            <!-- 1. Nissan Armada (Фото 1-4) -->
+            <!-- 1. Nissan Armada -->
             <div class="car-card">
                 <div class="slider-container">
-                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
-                    <div class="car-slider">
-                        <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Armada 1">
-                        <img src="799de5b9-297d-449c-8c62-54e67465e94c.jpg" class="car-slide-img" alt="Armada 2">
-                        <img src="1871b64b-447d-4098-98c1-28d392cb0c2e.jpg" class="car-slide-img" alt="Armada 3">
-                        <img src="3661a1a9-e2c5-4674-917e-9bf6b1bbea6a.jpg" class="car-slide-img" alt="Armada 4">
-                    </div>
-                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <button class="slider-btn prev" onclick="changeSlide('armada', -1)">‹</button>
+                    <img id="img-armada" src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Nissan Armada">
+                    <button class="slider-btn next" onclick="changeSlide('armada', 1)">›</button>
                     <div class="car-label">💪 Nissan Armada (2018)</div>
                 </div>
                 <div class="car-content">
@@ -550,17 +527,12 @@
                 </div>
             </div>
 
-            <!-- 2. Mercedes EQE (Фото 5-8) -->
+            <!-- 2. Mercedes EQE -->
             <div class="car-card">
                 <div class="slider-container">
-                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
-                    <div class="car-slider">
-                        <img src="clipboard_paste_1788547321361.png" class="car-slide-img" alt="EQE 1">
-                        <img src="clipboard_paste_1788547341367.png" class="car-slide-img" alt="EQE 2">
-                        <img src="clipboard_paste_1788547366073.png" class="car-slide-img" alt="EQE 3">
-                        <img src="clipboard_paste_1788547377984.png" class="car-slide-img" alt="EQE 4">
-                    </div>
-                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <button class="slider-btn prev" onclick="changeSlide('eqe', -1)">‹</button>
+                    <img id="img-eqe" src="clipboard_paste_1788547321361.png" class="car-slide-img" alt="Mercedes EQE">
+                    <button class="slider-btn next" onclick="changeSlide('eqe', 1)">›</button>
                     <div class="car-label">✨ Mercedes EQE (2025)</div>
                 </div>
                 <div class="car-content">
@@ -574,17 +546,12 @@
                 </div>
             </div>
 
-            <!-- 3. Mercedes VLE (Фото 9-12) -->
+            <!-- 3. Mercedes VLE -->
             <div class="car-card">
                 <div class="slider-container">
-                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
-                    <div class="car-slider">
-                        <img src="clipboard_paste_1788547805659.png" class="car-slide-img" alt="VLE 1">
-                        <img src="clipboard_paste_1788547833249.png" class="car-slide-img" alt="VLE 2">
-                        <img src="clipboard_paste_1788547864206.png" class="car-slide-img" alt="VLE 3">
-                        <img src="clipboard_paste_1788548014800.png" class="car-slide-img" alt="VLE 4">
-                    </div>
-                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <button class="slider-btn prev" onclick="changeSlide('vle', -1)">‹</button>
+                    <img id="img-vle" src="clipboard_paste_1788547805659.png" class="car-slide-img" alt="Mercedes VLE">
+                    <button class="slider-btn next" onclick="changeSlide('vle', 1)">›</button>
                     <div class="car-label">🚐 Mercedes VLE (2026)</div>
                 </div>
                 <div class="car-content">
@@ -598,17 +565,12 @@
                 </div>
             </div>
 
-            <!-- 4. Tesla Model Y (Фото 13-16) -->
+            <!-- 4. Tesla Model Y -->
             <div class="car-card">
                 <div class="slider-container">
-                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
-                    <div class="car-slider">
-                        <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Tesla 1">
-                        <img src="clipboard_paste_1788548566069.png" class="car-slide-img" alt="Tesla 2">
-                        <img src="clipboard_paste_1788548592576.png" class="car-slide-img" alt="Tesla 3">
-                        <img src="clipboard_paste_1788548674319.png" class="car-slide-img" alt="Tesla 4">
-                    </div>
-                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <button class="slider-btn prev" onclick="changeSlide('tesla', -1)">‹</button>
+                    <img id="img-tesla" src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Tesla Model Y">
+                    <button class="slider-btn next" onclick="changeSlide('tesla', 1)">›</button>
                     <div class="car-label">⚡ Tesla Model Y (2025)</div>
                 </div>
                 <div class="car-content">
@@ -629,6 +591,54 @@
     </footer>
 
     <script>
+        // Изолированные массивы картинок для каждой машины
+        const carImages = {
+            armada: [
+                "1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg",
+                "799de5b9-297d-449c-8c62-54e67465e94c.jpg",
+                "1871b64b-447d-4098-98c1-28d392cb0c2e.jpg",
+                "3661a1a9-e2c5-4674-917e-9bf6b1bbea6a.jpg"
+            ],
+            eqe: [
+                "clipboard_paste_1788547321361.png",
+                "clipboard_paste_1788547341367.png",
+                "clipboard_paste_1788547366073.png",
+                "clipboard_paste_1788547377984.png"
+            ],
+            vle: [
+                "clipboard_paste_1788547805659.png",
+                "clipboard_paste_1788547833249.png",
+                "clipboard_paste_1788547864206.png",
+                "clipboard_paste_1788548014800.png"
+            ],
+            tesla: [
+                "clipboard_paste_1788548549219.png",
+                "clipboard_paste_1788548566069.png",
+                "clipboard_paste_1788548592576.png",
+                "clipboard_paste_1788548674319.png"
+            ]
+        };
+
+        const carIndexes = {
+            armada: 0,
+            eqe: 0,
+            vle: 0,
+            tesla: 0
+        };
+
+        function changeSlide(carKey, direction) {
+            const arr = carImages[carKey];
+            carIndexes[carKey] += direction;
+            
+            if (carIndexes[carKey] < 0) {
+                carIndexes[carKey] = arr.length - 1;
+            } else if (carIndexes[carKey] >= arr.length) {
+                carIndexes[carKey] = 0;
+            }
+
+            document.getElementById('img-' + carKey).src = arr[carIndexes[carKey]];
+        }
+
         const dict = {
             de: {
                 title: "VIP Transfer Wien",
@@ -758,12 +768,6 @@
                 html.setAttribute('data-theme', 'dark');
                 btn.innerText = '☀️';
             }
-        }
-
-        function scrollSlider(btn, direction) {
-            const container = btn.parentElement.querySelector('.car-slider');
-            const scrollAmount = container.clientWidth * direction;
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
 
         function updateCalculation() {
