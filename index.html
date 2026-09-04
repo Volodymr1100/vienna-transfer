@@ -127,7 +127,7 @@
         .hero-card {
             width: 100%;
             max-width: 480px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('0-02-05-0514e7a40e3ce8e1a0b4fa1a24807c15593c7b85dd5741cfb898a15a419af123_5d117c49b10dc08e.jpg') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg') center/cover;
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 35px 20px;
@@ -275,7 +275,6 @@
             color: var(--accent);
         }
 
-        /* Секция автопарка */
         .fleet-section {
             width: 100%;
             max-width: 480px;
@@ -311,7 +310,6 @@
             overflow: hidden;
         }
 
-        /* Свайпер для фото */
         .slider-container {
             position: relative;
             width: 100%;
@@ -441,7 +439,6 @@
         </div>
     </div>
 
-    <!-- 1. Главный блок с Теслой вверху -->
     <div class="hero-card">
         <h1 id="hero-title">VIP Transfer Wien</h1>
         <p id="hero-desc">Schnelle und komfortable Fahrten in Wien & Umgebung mit Tesla Model Y.</p>
@@ -464,7 +461,6 @@
         <a href="https://wa.me/4368181534660" class="card-btn" id="btn-wa-main">In WhatsApp schreiben</a>
     </div>
 
-    <!-- 2. Цены (Тарифы) -->
     <div class="card">
         <h3 id="t1-title">Flughafentransfer</h3>
         <div class="price-amount">85 €</div>
@@ -486,7 +482,6 @@
         <a href="https://wa.me/4368181534660?text=Fernfahrt%20anfragen" class="card-btn" id="btn-b3">Via WhatsApp Buchen</a>
     </div>
 
-    <!-- 3. Калькулятор и Бронирование -->
     <div class="interactive-section">
         <h3 id="calc-header">🧮 Schnell-Kalkulator</h3>
         <div class="form-group">
@@ -523,7 +518,7 @@
         <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
     </div>
 
-    <!-- 4. Секция автопарка со всеми твоими фотками в каруселях -->
+    <!-- Автопарк со всеми распределенными фото -->
     <div class="fleet-section" id="fuhrpark">
         <div class="fleet-header">
             <h3>UNSER FUHRPARK</h3>
@@ -531,12 +526,15 @@
         </div>
 
         <div class="fleet-grid">
-            <!-- 1. Nissan Armada -->
+            <!-- 1. Nissan Armada 2018 (4 фото) -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
                     <div class="car-slider">
                         <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Nissan Armada 1">
+                        <img src="799de5b9-297d-449c-8c62-54e67465e94c.jpg" class="car-slide-img" alt="Nissan Armada 2">
+                        <img src="1871b64b-447d-4098-98c1-28d392cb0c2e.jpg" class="car-slide-img" alt="Nissan Armada 3">
+                        <img src="3661a1a9-e2c5-4674-917e-9bf6b1bbea6a.jpg" class="car-slide-img" alt="Nissan Armada 4">
                     </div>
                     <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
                     <div class="car-label">💪 Nissan Armada (2018)</div>
@@ -552,14 +550,15 @@
                 </div>
             </div>
 
-            <!-- 2. Mercedes EQE (все фото, которые ты кидал для него) -->
+            <!-- 2. Mercedes EQE 2025 (4 фото) -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
                     <div class="car-slider">
                         <img src="clipboard_paste_1788547366073.png" class="car-slide-img" alt="Mercedes EQE 1">
-                        <!-- Добавил вторую фотку, которую ты отправлял -->
-                        <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Mercedes EQE 2">
+                        <img src="clipboard_paste_1788547377984.png" class="car-slide-img" alt="Mercedes EQE 2">
+                        <img src="clipboard_paste_1788547321361.png" class="car-slide-img" alt="Mercedes EQE 3">
+                        <img src="clipboard_paste_1788547341367.png" class="car-slide-img" alt="Mercedes EQE 4">
                     </div>
                     <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
                     <div class="car-label">✨ Mercedes EQE (2025)</div>
@@ -575,12 +574,15 @@
                 </div>
             </div>
 
-            <!-- 3. Mercedes VLE -->
+            <!-- 3. Mercedes VLE 2026 (4 фото) -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
                     <div class="car-slider">
-                        <img src="clipboard_paste_1788547833249.png" class="car-slide-img" alt="Mercedes VLE">
+                        <img src="clipboard_paste_1788547833249.png" class="car-slide-img" alt="Mercedes VLE 1">
+                        <img src="clipboard_paste_1788547805659.png" class="car-slide-img" alt="Mercedes VLE 2">
+                        <img src="clipboard_paste_1788547864206.png" class="car-slide-img" alt="Mercedes VLE 3">
+                        <img src="clipboard_paste_1788548014800.png" class="car-slide-img" alt="Mercedes VLE 4">
                     </div>
                     <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
                     <div class="car-label">🚐 Mercedes VLE (2026)</div>
@@ -596,12 +598,15 @@
                 </div>
             </div>
 
-            <!-- 4. Tesla Model Y -->
+            <!-- 4. Tesla Model Y 2025 (5 фото) -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
                     <div class="car-slider">
-                        <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Tesla Model Y">
+                        <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Tesla Model Y 1">
+                        <img src="clipboard_paste_1788548566069.png" class="car-slide-img" alt="Tesla Model Y 2">
+                        <img src="clipboard_paste_1788548592576.png" class="car-slide-img" alt="Tesla Model Y 3">
+                        <img src="clipboard_paste_1788548674319.png" class="car-slide-img" alt="Tesla Model Y 4">
                     </div>
                     <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
                     <div class="car-label">⚡ Tesla Model Y (2025)</div>
