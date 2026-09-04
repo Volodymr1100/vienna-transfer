@@ -275,7 +275,7 @@
             color: var(--accent);
         }
 
-        /* Секция автопарка снизу */
+        /* Секция автопарка */
         .fleet-section {
             width: 100%;
             max-width: 480px;
@@ -311,17 +311,27 @@
             overflow: hidden;
         }
 
-        .car-image {
+        /* Слайдер с фото */
+        .car-slider {
             position: relative;
             width: 100%;
-            height: 240px;
+            height: 220px;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* скрываем скроллбар Firefox */
         }
 
-        .car-image img {
+        .car-slider::-webkit-scrollbar {
+            display: none; /* скрываем скроллбар Chrome/Safari */
+        }
+
+        .car-slide-img {
+            flex: 0 0 100%;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
+            scroll-snap-align: start;
         }
 
         .car-label {
@@ -330,28 +340,30 @@
             left: 12px;
             background: rgba(0, 0, 0, 0.75);
             color: #ffffff;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 8px;
             font-size: 0.75rem;
             font-weight: 600;
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.1);
+            z-index: 2;
+            pointer-events: none;
         }
 
         .car-content {
-            padding: 20px;
+            padding: 18px;
         }
 
         .car-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .car-desc {
             color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-bottom: 15px;
+            font-size: 0.82rem;
+            margin-bottom: 12px;
             line-height: 1.4;
         }
 
@@ -359,13 +371,13 @@
             list-style: none;
             margin-bottom: 15px;
             border-top: 1px solid var(--border);
-            padding-top: 12px;
+            padding-top: 10px;
         }
 
         .car-specs li {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-main);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
         }
@@ -401,6 +413,7 @@
         </div>
     </div>
 
+    <!-- 1. Главный блок с Теслой вверху -->
     <div class="hero-card">
         <h1 id="hero-title">VIP Transfer Wien</h1>
         <p id="hero-desc">Schnelle und komfortable Fahrten in Wien & Umgebung mit Tesla Model Y.</p>
@@ -423,6 +436,7 @@
         <a href="https://wa.me/4368181534660" class="card-btn" id="btn-wa-main">In WhatsApp schreiben</a>
     </div>
 
+    <!-- 2. Цены (Тарифы) -->
     <div class="card">
         <h3 id="t1-title">Flughafentransfer</h3>
         <div class="price-amount">85 €</div>
@@ -444,6 +458,7 @@
         <a href="https://wa.me/4368181534660?text=Fernfahrt%20anfragen" class="card-btn" id="btn-b3">Via WhatsApp Buchen</a>
     </div>
 
+    <!-- 3. Калькулятор и Бронирование -->
     <div class="interactive-section">
         <h3 id="calc-header">🧮 Schnell-Kalkulator</h3>
         <div class="form-group">
@@ -480,6 +495,7 @@
         <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
     </div>
 
+    <!-- 4. Секция автопарка со слайдерами фотографий -->
     <div class="fleet-section" id="fuhrpark">
         <div class="fleet-header">
             <h3>UNSER FUHRPARK</h3>
@@ -487,11 +503,13 @@
         </div>
 
         <div class="fleet-grid">
+            <!-- 1. Nissan Armada -->
             <div class="car-card">
-                <div class="car-image">
-                    <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" alt="Nissan Armada">
-                    <div class="car-label">💪 Nissan Armada (2018)</div>
+                <div class="car-slider">
+                    <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Nissan Armada">
+                    <!-- Можно добавить второе фото сюда, если нужно -->
                 </div>
+                <div class="car-label">💪 Nissan Armada (2018)</div>
                 <div class="car-content">
                     <h3 class="car-title">Nissan Armada 2018</h3>
                     <p class="car-desc">Kraftvoller Full-Size SUV mit V8-Motor, maximalem Platzangebot und Sicherheit.</p>
@@ -503,11 +521,12 @@
                 </div>
             </div>
 
+            <!-- 2. Mercedes EQE -->
             <div class="car-card">
-                <div class="car-image">
-                    <img src="clipboard_paste_1788547366073.png" alt="Mercedes EQE">
-                    <div class="car-label">✨ Mercedes EQE (2025)</div>
+                <div class="car-slider">
+                    <img src="clipboard_paste_1788547366073.png" class="car-slide-img" alt="Mercedes EQE">
                 </div>
+                <div class="car-label">✨ Mercedes EQE (2025)</div>
                 <div class="car-content">
                     <h3 class="car-title">Mercedes EQE 2025</h3>
                     <p class="car-desc">Futuristische Elektro-Luxuslimousine mit herausragendem Komfort und moderner Technik.</p>
@@ -519,11 +538,12 @@
                 </div>
             </div>
 
+            <!-- 3. Mercedes VLE -->
             <div class="car-card">
-                <div class="car-image">
-                    <img src="clipboard_paste_1788547833249.png" alt="Mercedes VLE">
-                    <div class="car-label">🚐 Mercedes VLE (2026)</div>
+                <div class="car-slider">
+                    <img src="clipboard_paste_1788547833249.png" class="car-slide-img" alt="Mercedes VLE">
                 </div>
+                <div class="car-label">🚐 Mercedes VLE (2026)</div>
                 <div class="car-content">
                     <h3 class="car-title">Mercedes VLE 2026</h3>
                     <p class="car-desc">Der Inbegriff von VIP-Shuttles. Maximaler Raum, edles Interieur und Privatsphäre.</p>
@@ -535,11 +555,12 @@
                 </div>
             </div>
 
+            <!-- 4. Tesla Model Y -->
             <div class="car-card">
-                <div class="car-image">
-                    <img src="clipboard_paste_1788548549219.png" alt="Tesla Model Y">
-                    <div class="car-label">⚡ Tesla Model Y (2025)</div>
+                <div class="car-slider">
+                    <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Tesla Model Y">
                 </div>
+                <div class="car-label">⚡ Tesla Model Y (2025)</div>
                 <div class="car-content">
                     <h3 class="car-title">Tesla Model Y 2025</h3>
                     <p class="car-desc">Voll elektrische Premium-Fahrten für höchste Ansprüche an Umweltfreundlichkeit.</p>
