@@ -4,107 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vienna Transfer — VIP Transfer & Fuhrpark</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root[data-theme="dark"] {
-            --bg-color: #0b0b0b;
-            --card-bg: #141414;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --accent: #25d366;
-            --accent-hover: #20ba5a;
-            --border: #222222;
-            --input-bg: #1a1a1a;
-            --star-color: #ffd700;
+            --bg-color: #060608;
+            --card-bg: rgba(18, 18, 22, 0.75);
+            --card-solid: #121216;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --accent-hover: #059669;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(16, 185, 129, 0.4);
+            --input-bg: rgba(255, 255, 255, 0.03);
+            --star-color: #f59e0b;
+            --glow: rgba(16, 185, 129, 0.15);
         }
 
         :root[data-theme="light"] {
-            --bg-color: #f4f4f6;
-            --card-bg: #ffffff;
-            --text-main: #111111;
-            --text-muted: #666666;
-            --accent: #00a844;
-            --accent-hover: #008f3b;
-            --border: #dddddd;
-            --input-bg: #eeeeee;
-            --star-color: #ffb800;
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-solid: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #059669;
+            --accent-gradient: linear-gradient(135deg, #059669 0%, #047857 100%);
+            --accent-hover: #047857;
+            --border: rgba(0, 0, 0, 0.08);
+            --border-hover: rgba(5, 150, 105, 0.4);
+            --input-bg: rgba(0, 0, 0, 0.02);
+            --star-color: #d97706;
+            --glow: rgba(5, 150, 105, 0.1);
         }
 
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 20px;
+            padding: 0 16px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
         }
 
+        /* Glassmorphism Sticky Header */
         .header {
+            position: sticky;
+            top: 12px;
             width: 100%;
             max-width: 480px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 0 5px;
+            margin-bottom: 24px;
+            padding: 10px 14px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .logo-block {
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
             font-size: 0.95rem;
             line-height: 1.1;
+            display: flex;
+            flex-direction: column;
         }
 
         .logo-block span {
             color: var(--text-muted);
-            font-weight: 400;
-            font-size: 0.75rem;
-            display: block;
+            font-weight: 500;
+            font-size: 0.7rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .icon-btn, .phone-badge {
-            background: var(--card-bg);
+            background: var(--input-bg);
             border: 1px solid var(--border);
             color: var(--text-main);
-            height: 32px;
-            border-radius: 8px;
+            height: 34px;
+            border-radius: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.75rem;
-            padding: 0 8px;
+            padding: 0 10px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+        }
+
+        .icon-btn:hover, .phone-badge:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
         }
 
         .icon-btn {
-            width: 32px;
+            width: 34px;
             padding: 0;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .lang-switcher, .currency-switcher {
             display: flex;
-            gap: 1px;
-            background: var(--card-bg);
+            gap: 2px;
+            background: var(--input-bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 2px;
         }
 
@@ -112,51 +142,81 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 4px 5px;
-            border-radius: 6px;
+            padding: 4px 6px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 0.65rem;
-            font-weight: 600;
+            font-size: 0.68rem;
+            font-weight: 700;
         }
 
         .lang-btn.active, .curr-btn.active {
             color: var(--text-main);
-            background: var(--input-bg);
+            background: var(--card-solid);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
+        /* Fade-in Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Hero Card */
         .hero-card {
             width: 100%;
             max-width: 480px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('clipboard_paste_1788548549219.png') center/cover;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(6,6,8,0.85) 100%), url('clipboard_paste_1788548549219.png') center/cover;
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 35px 20px;
+            border-radius: 24px;
+            padding: 40px 22px 30px;
             text-align: center;
             margin-bottom: 20px;
             color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), transparent);
+            pointer-events: none;
         }
 
         .hero-card h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 1.85rem;
+            font-weight: 800;
             margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
 
         .hero-card p {
-            color: #dddddd;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            color: #cbd5e1;
+            font-size: 0.92rem;
+            margin-bottom: 24px;
+            line-height: 1.5;
         }
 
         .features-grid {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
-            font-size: 0.75rem;
-            color: #cccccc;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 15px;
+            margin-bottom: 24px;
+            font-size: 0.78rem;
+            color: #e2e8f0;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            padding-top: 18px;
         }
 
         .feature-item {
@@ -167,95 +227,108 @@
         }
 
         .feature-item span {
-            font-weight: 600;
+            font-weight: 700;
             color: #ffffff;
         }
 
-        .card {
+        .feature-item small {
+            color: #94a3b8;
+            font-size: 0.7rem;
+        }
+
+        /* Base Card Styling */
+        .card, .interactive-section, .testimonials-section, .fleet-section {
             width: 100%;
             max-width: 480px;
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px 20px;
+            border-radius: 24px;
+            padding: 28px 22px;
             text-align: center;
             margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .card h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 12px;
+        .card:hover, .interactive-section:hover {
+            border-color: var(--border-hover);
+        }
+
+        .card h3, .interactive-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
         }
 
         .price-amount {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .price-sub {
             color: var(--text-muted);
             font-size: 0.85rem;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+            font-weight: 500;
         }
 
+        /* Action Buttons with Glow */
         .card-btn {
             display: block;
             width: 100%;
-            background-color: var(--accent);
-            color: #000000;
+            background: var(--accent-gradient);
+            color: #ffffff;
             text-decoration: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 600;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 700;
             font-size: 0.95rem;
             border: none;
             cursor: pointer;
+            box-shadow: 0 6px 20px var(--glow);
         }
 
         .card-btn:hover {
-            background-color: var(--accent-hover);
+            opacity: 0.92;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--glow);
         }
 
-        .interactive-section {
-            width: 100%;
-            max-width: 480px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px 20px;
-            margin-bottom: 20px;
-        }
-
-        .interactive-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
+        /* Interactive & Forms */
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.81rem;
             color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 500;
+            margin-bottom: 7px;
+            font-weight: 600;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px;
+            padding: 13px 15px;
             background: var(--input-bg);
             border: 1px solid var(--border);
             color: var(--text-main);
-            border-radius: 10px;
-            font-size: 0.9rem;
+            border-radius: 12px;
+            font-size: 0.92rem;
             outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--glow);
         }
 
         .calc-result {
@@ -263,87 +336,82 @@
             justify-content: space-between;
             align-items: center;
             background: var(--input-bg);
-            padding: 12px 15px;
-            border-radius: 10px;
-            margin: 15px 0;
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 18px 0;
             font-weight: 600;
         }
 
         .calc-price {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--accent);
         }
 
-        /* Блок отзывов (Testimonials) */
-        .testimonials-section {
-            width: 100%;
-            max-width: 480px;
-            margin-bottom: 25px;
-        }
-
+        /* Testimonials */
         .testimonials-header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .testimonials-header h3 {
             font-size: 1.3rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 4px;
         }
 
         .testimonials-header p {
             color: var(--text-muted);
-            font-size: 0.82rem;
+            font-size: 0.84rem;
         }
 
         .testimonials-grid {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
         }
 
         .testimonial-card {
-            background: var(--card-bg);
+            background: var(--input-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 18px;
+            text-align: left;
         }
 
         .review-stars {
             color: var(--star-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 8px;
+            letter-spacing: 2px;
         }
 
         .review-text {
             font-size: 0.85rem;
             color: var(--text-main);
-            line-height: 1.4;
+            line-height: 1.45;
             margin-bottom: 10px;
+            font-weight: 500;
         }
 
         .review-author {
             font-size: 0.78rem;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        .fleet-section {
-            width: 100%;
-            max-width: 480px;
-            margin-bottom: 25px;
-        }
-
+        /* Fleet Section */
         .fleet-header {
             text-align: center;
             margin-bottom: 20px;
         }
 
         .fleet-header h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
         }
 
         .fleet-header p {
@@ -359,15 +427,22 @@
 
         .car-card {
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .car-card:hover {
+            border-color: var(--border-hover);
         }
 
         .slider-container {
             position: relative;
             width: 100%;
-            height: 240px;
+            height: 245px;
             background: #000;
         }
 
@@ -384,12 +459,12 @@
             left: 12px;
             background: rgba(0, 0, 0, 0.75);
             color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 10px;
             font-size: 0.75rem;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.12);
             z-index: 5;
             pointer-events: none;
         }
@@ -401,71 +476,80 @@
             background: rgba(0, 0, 0, 0.6);
             color: #fff;
             border: 1px solid rgba(255,255,255,0.2);
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 10;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            backdrop-filter: blur(4px);
         }
 
-        .slider-btn.prev { left: 10px; }
-        .slider-btn.next { right: 10px; }
+        .slider-btn:hover {
+            background: rgba(0, 0, 0, 0.85);
+            border-color: var(--accent);
+        }
+
+        .slider-btn.prev { left: 12px; }
+        .slider-btn.next { right: 12px; }
 
         .car-content {
-            padding: 18px;
+            padding: 20px;
         }
 
         .car-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.15rem;
+            font-weight: 700;
             margin-bottom: 6px;
         }
 
         .car-desc {
             color: var(--text-muted);
-            font-size: 0.82rem;
-            margin-bottom: 12px;
-            line-height: 1.4;
+            font-size: 0.84rem;
+            margin-bottom: 14px;
+            line-height: 1.45;
         }
 
         .car-specs {
             list-style: none;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             border-top: 1px solid var(--border);
-            padding-top: 10px;
+            padding-top: 12px;
         }
 
         .car-specs li {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: var(--text-main);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
+            font-weight: 600;
         }
 
         .car-specs li span {
             color: var(--text-muted);
+            font-weight: 500;
         }
 
         footer {
             text-align: center;
             color: var(--text-muted);
             font-size: 0.8rem;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            margin-top: 10px;
+            line-height: 1.6;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
+    <div class="header animate-up">
         <div class="logo-block">
             VIENNA
-            <span>TRANSFER</span>
+            <span>TRANSFER VIP</span>
         </div>
         <div class="header-right">
             <div class="currency-switcher">
@@ -483,7 +567,7 @@
         </div>
     </div>
 
-    <div class="hero-card">
+    <div class="hero-card animate-up" style="animation-delay: 0.1s;">
         <h1 id="hero-title">VIP Transfer Wien</h1>
         <p id="hero-desc">Schnelle und komfortable Fahrten in Wien & Umgebung mit Tesla Model Y.</p>
         
@@ -505,28 +589,28 @@
         <a href="https://wa.me/4368181534660" class="card-btn" id="btn-wa-main">In WhatsApp schreiben</a>
     </div>
 
-    <div class="card">
+    <div class="card animate-up" style="animation-delay: 0.15s;">
         <h3 id="t1-title">Flughafentransfer</h3>
         <div class="price-amount" data-base="85">85 €</div>
         <div class="price-sub" id="t1-sub">Flughafen Wien ⇄ Wien Stadt</div>
         <a href="https://wa.me/4368181534660?text=Flughafentransfer%20buchen" class="card-btn" id="btn-b1">Via WhatsApp Buchen</a>
     </div>
 
-    <div class="card">
+    <div class="card animate-up" style="animation-delay: 0.2s;">
         <h3 id="t2-title">Stundenweise Miete</h3>
         <div class="price-amount" data-base="90">90 €</div>
         <div class="price-sub" id="t2-sub">pro Stunde (Chauffeur inklusive)</div>
         <a href="https://wa.me/4368181534660?text=Stundenweise%20Miete%20anfragen" class="card-btn" id="btn-b2">Via WhatsApp Buchen</a>
     </div>
 
-    <div class="card">
+    <div class="card animate-up" style="animation-delay: 0.25s;">
         <h3 id="t3-title">Fernfahrten</h3>
         <div class="price-amount" data-base="190">ab 190 €</div>
         <div class="price-sub" id="t3-sub">Bratislava 190€ | Budapest 490€ | Salzburg 590€</div>
         <a href="https://wa.me/4368181534660?text=Fernfahrt%20anfragen" class="card-btn" id="btn-b3">Via WhatsApp Buchen</a>
     </div>
 
-    <div class="interactive-section">
+    <div class="interactive-section animate-up" style="animation-delay: 0.3s;">
         <h3 id="calc-header">🧮 Schnell-Kalkulator</h3>
         <div class="form-group">
             <label id="lbl-route">Wählen Sie die Route:</label>
@@ -545,7 +629,7 @@
         <button class="card-btn" onclick="bookCalculatedTrip()" id="btn-calc-order">Bereitschaft anfragen via WhatsApp</button>
     </div>
 
-    <div class="interactive-section">
+    <div class="interactive-section animate-up" style="animation-delay: 0.35s;">
         <h3 id="book-header">📅 Online Vorbestellung</h3>
         <div class="form-group">
             <label id="lbl-name">Ihr Name:</label>
@@ -562,7 +646,7 @@
         <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
     </div>
 
-    <div class="testimonials-section">
+    <div class="testimonials-section animate-up" style="animation-delay: 0.4s;">
         <div class="testimonials-header">
             <h3 id="rev-title">Kundenbewertungen</h3>
             <p id="rev-subtitle">Was unsere Fahrgäste über uns sagen</p>
@@ -581,13 +665,14 @@
         </div>
     </div>
 
-    <div class="fleet-section" id="fuhrpark">
+    <div class="fleet-section animate-up" id="fuhrpark" style="animation-delay: 0.45s;">
         <div class="fleet-header">
             <h3 id="fleet-title">UNSER FUHRPARK</h3>
             <p id="fleet-subtitle">Wählen Sie Ihr Wunschfahrzeug für die Fahrt</p>
         </div>
 
         <div class="fleet-grid">
+            <!-- 1. Nissan Armada -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="changeSlide('armada', -1)">‹</button>
@@ -606,6 +691,7 @@
                 </div>
             </div>
 
+            <!-- 2. Mercedes EQE -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="changeSlide('eqe', -1)">‹</button>
@@ -624,6 +710,7 @@
                 </div>
             </div>
 
+            <!-- 3. Mercedes VLE -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="changeSlide('vle', -1)">‹</button>
@@ -642,6 +729,7 @@
                 </div>
             </div>
 
+            <!-- 4. Tesla Model Y -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="changeSlide('tesla', -1)">‹</button>
@@ -663,7 +751,7 @@
     </div>
 
     <footer>
-        &copy; 2026 VIENNA TRANSFER | vienna.transfer.vip@gmail.com
+        &copy; 2026 VIENNA TRANSFER VIP &bull; vienna.transfer.vip@gmail.com
     </footer>
 
     <script>
