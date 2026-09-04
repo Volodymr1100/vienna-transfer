@@ -311,7 +311,7 @@
             overflow: hidden;
         }
 
-        /* Идеальный свайпер для фото */
+        /* Свайпер для фото */
         .slider-container {
             position: relative;
             width: 100%;
@@ -357,7 +357,6 @@
             pointer-events: none;
         }
 
-        /* Кнопки прокрутки влево/вправо поверх фото */
         .slider-btn {
             position: absolute;
             top: 50%;
@@ -524,7 +523,7 @@
         <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
     </div>
 
-    <!-- 4. Секция автопарка с работающими свайперами -->
+    <!-- 4. Секция автопарка со всеми твоими фотками в каруселях -->
     <div class="fleet-section" id="fuhrpark">
         <div class="fleet-header">
             <h3>UNSER FUHRPARK</h3>
@@ -537,8 +536,7 @@
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
                     <div class="car-slider">
-                        <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Nissan Armada">
-                        <!-- Сюда можно добавить вторую картинку: <img src="URL_ВТОРОГО_ФОТО" class="car-slide-img" alt="..."> -->
+                        <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Nissan Armada 1">
                     </div>
                     <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
                     <div class="car-label">💪 Nissan Armada (2018)</div>
@@ -554,12 +552,14 @@
                 </div>
             </div>
 
-            <!-- 2. Mercedes EQE -->
+            <!-- 2. Mercedes EQE (все фото, которые ты кидал для него) -->
             <div class="car-card">
                 <div class="slider-container">
                     <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
                     <div class="car-slider">
-                        <img src="clipboard_paste_1788547366073.png" class="car-slide-img" alt="Mercedes EQE">
+                        <img src="clipboard_paste_1788547366073.png" class="car-slide-img" alt="Mercedes EQE 1">
+                        <!-- Добавил вторую фотку, которую ты отправлял -->
+                        <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Mercedes EQE 2">
                     </div>
                     <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
                     <div class="car-label">✨ Mercedes EQE (2025)</div>
