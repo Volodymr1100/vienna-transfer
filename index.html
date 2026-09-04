@@ -311,19 +311,26 @@
             overflow: hidden;
         }
 
-        /* Слайдер с фото */
-        .car-slider {
+        /* Идеальный свайпер для фото */
+        .slider-container {
             position: relative;
             width: 100%;
-            height: 220px;
+            height: 240px;
+            background: #000;
+        }
+
+        .car-slider {
             display: flex;
-            overflow-x: auto;
+            width: 100%;
+            height: 100%;
+            overflow-x: scroll;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* скрываем скроллбар Firefox */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
 
         .car-slider::-webkit-scrollbar {
-            display: none; /* скрываем скроллбар Chrome/Safari */
+            display: none;
         }
 
         .car-slide-img {
@@ -346,9 +353,31 @@
             font-weight: 600;
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.1);
-            z-index: 2;
+            z-index: 5;
             pointer-events: none;
         }
+
+        /* Кнопки прокрутки влево/вправо поверх фото */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1rem;
+        }
+
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
 
         .car-content {
             padding: 18px;
@@ -495,7 +524,7 @@
         <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
     </div>
 
-    <!-- 4. Секция автопарка со слайдерами фотографий -->
+    <!-- 4. Секция автопарка с работающими свайперами -->
     <div class="fleet-section" id="fuhrpark">
         <div class="fleet-header">
             <h3>UNSER FUHRPARK</h3>
@@ -505,11 +534,15 @@
         <div class="fleet-grid">
             <!-- 1. Nissan Armada -->
             <div class="car-card">
-                <div class="car-slider">
-                    <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Nissan Armada">
-                    <!-- Можно добавить второе фото сюда, если нужно -->
+                <div class="slider-container">
+                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
+                    <div class="car-slider">
+                        <img src="1e9f1b8f-c501-48dd-a649-1a4522149c63.jpg" class="car-slide-img" alt="Nissan Armada">
+                        <!-- Сюда можно добавить вторую картинку: <img src="URL_ВТОРОГО_ФОТО" class="car-slide-img" alt="..."> -->
+                    </div>
+                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <div class="car-label">💪 Nissan Armada (2018)</div>
                 </div>
-                <div class="car-label">💪 Nissan Armada (2018)</div>
                 <div class="car-content">
                     <h3 class="car-title">Nissan Armada 2018</h3>
                     <p class="car-desc">Kraftvoller Full-Size SUV mit V8-Motor, maximalem Platzangebot und Sicherheit.</p>
@@ -523,10 +556,14 @@
 
             <!-- 2. Mercedes EQE -->
             <div class="car-card">
-                <div class="car-slider">
-                    <img src="clipboard_paste_1788547366073.png" class="car-slide-img" alt="Mercedes EQE">
+                <div class="slider-container">
+                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
+                    <div class="car-slider">
+                        <img src="clipboard_paste_1788547366073.png" class="car-slide-img" alt="Mercedes EQE">
+                    </div>
+                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <div class="car-label">✨ Mercedes EQE (2025)</div>
                 </div>
-                <div class="car-label">✨ Mercedes EQE (2025)</div>
                 <div class="car-content">
                     <h3 class="car-title">Mercedes EQE 2025</h3>
                     <p class="car-desc">Futuristische Elektro-Luxuslimousine mit herausragendem Komfort und moderner Technik.</p>
@@ -540,10 +577,14 @@
 
             <!-- 3. Mercedes VLE -->
             <div class="car-card">
-                <div class="car-slider">
-                    <img src="clipboard_paste_1788547833249.png" class="car-slide-img" alt="Mercedes VLE">
+                <div class="slider-container">
+                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
+                    <div class="car-slider">
+                        <img src="clipboard_paste_1788547833249.png" class="car-slide-img" alt="Mercedes VLE">
+                    </div>
+                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <div class="car-label">🚐 Mercedes VLE (2026)</div>
                 </div>
-                <div class="car-label">🚐 Mercedes VLE (2026)</div>
                 <div class="car-content">
                     <h3 class="car-title">Mercedes VLE 2026</h3>
                     <p class="car-desc">Der Inbegriff von VIP-Shuttles. Maximaler Raum, edles Interieur und Privatsphäre.</p>
@@ -557,10 +598,14 @@
 
             <!-- 4. Tesla Model Y -->
             <div class="car-card">
-                <div class="car-slider">
-                    <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Tesla Model Y">
+                <div class="slider-container">
+                    <button class="slider-btn prev" onclick="scrollSlider(this, -1)">‹</button>
+                    <div class="car-slider">
+                        <img src="clipboard_paste_1788548549219.png" class="car-slide-img" alt="Tesla Model Y">
+                    </div>
+                    <button class="slider-btn next" onclick="scrollSlider(this, 1)">›</button>
+                    <div class="car-label">⚡ Tesla Model Y (2025)</div>
                 </div>
-                <div class="car-label">⚡ Tesla Model Y (2025)</div>
                 <div class="car-content">
                     <h3 class="car-title">Tesla Model Y 2025</h3>
                     <p class="car-desc">Voll elektrische Premium-Fahrten für höchste Ansprüche an Umweltfreundlichkeit.</p>
@@ -708,6 +753,12 @@
                 html.setAttribute('data-theme', 'dark');
                 btn.innerText = '☀️';
             }
+        }
+
+        function scrollSlider(btn, direction) {
+            const container = btn.parentElement.querySelector('.car-slider');
+            const scrollAmount = container.clientWidth * direction;
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
 
         function updateCalculation() {
