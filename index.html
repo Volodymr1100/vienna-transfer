@@ -15,6 +15,7 @@
             --accent-hover: #20ba5a;
             --border: #222222;
             --input-bg: #1a1a1a;
+            --star-color: #ffd700;
         }
 
         :root[data-theme="light"] {
@@ -26,6 +27,7 @@
             --accent-hover: #008f3b;
             --border: #dddddd;
             --input-bg: #eeeeee;
+            --star-color: #ffb800;
         }
 
         * {
@@ -72,51 +74,51 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .icon-btn {
             background: var(--card-bg);
             border: 1px solid var(--border);
             color: var(--text-main);
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .phone-badge {
             border: 1px solid var(--border);
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            padding: 7px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-main);
             text-decoration: none;
             background: var(--card-bg);
         }
 
-        .lang-switcher {
+        .lang-switcher, .currency-switcher {
             display: flex;
-            gap: 4px;
+            gap: 3px;
         }
 
-        .lang-btn {
+        .lang-btn, .curr-btn {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 6px 8px;
+            padding: 5px 6px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
 
-        .lang-btn.active {
+        .lang-btn.active, .curr-btn.active {
             border-color: var(--text-main);
             color: var(--text-main);
             background: var(--card-bg);
@@ -272,6 +274,61 @@
             color: var(--accent);
         }
 
+        /* Блок отзывов (Testimonials) */
+        .testimonials-section {
+            width: 100%;
+            max-width: 480px;
+            margin-bottom: 25px;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .testimonials-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .testimonials-header p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .testimonials-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .review-stars {
+            color: var(--star-color);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
         .fleet-section {
             width: 100%;
             max-width: 480px;
@@ -411,6 +468,11 @@
             <span>TRANSFER</span>
         </div>
         <div class="header-right">
+            <div class="currency-switcher">
+                <button class="curr-btn active" onclick="setCurrency('EUR', event)">€</button>
+                <button class="curr-btn" onclick="setCurrency('USD', event)">$</button>
+                <button class="curr-btn" onclick="setCurrency('GBP', event)">£</button>
+            </div>
             <div class="lang-switcher">
                 <button class="lang-btn active" onclick="setLang('de', event)">DE</button>
                 <button class="lang-btn" onclick="setLang('en', event)">EN</button>
@@ -445,21 +507,21 @@
 
     <div class="card">
         <h3 id="t1-title">Flughafentransfer</h3>
-        <div class="price-amount">85 €</div>
+        <div class="price-amount" data-base="85">85 €</div>
         <div class="price-sub" id="t1-sub">Flughafen Wien ⇄ Wien Stadt</div>
         <a href="https://wa.me/4368181534660?text=Flughafentransfer%20buchen" class="card-btn" id="btn-b1">Via WhatsApp Buchen</a>
     </div>
 
     <div class="card">
         <h3 id="t2-title">Stundenweise Miete</h3>
-        <div class="price-amount">90 €</div>
+        <div class="price-amount" data-base="90">90 €</div>
         <div class="price-sub" id="t2-sub">pro Stunde (Chauffeur inklusive)</div>
         <a href="https://wa.me/4368181534660?text=Stundenweise%20Miete%20anfragen" class="card-btn" id="btn-b2">Via WhatsApp Buchen</a>
     </div>
 
     <div class="card">
         <h3 id="t3-title">Fernfahrten</h3>
-        <div class="price-amount">ab 190 €</div>
+        <div class="price-amount" data-base="190">ab 190 €</div>
         <div class="price-sub" id="t3-sub">Bratislava 190€ | Budapest 490€ | Salzburg 590€</div>
         <a href="https://wa.me/4368181534660?text=Fernfahrt%20anfragen" class="card-btn" id="btn-b3">Via WhatsApp Buchen</a>
     </div>
@@ -500,11 +562,31 @@
         <button class="card-btn" onclick="submitBookingForm()" id="btn-form-order">Jetzt verbindlich anfragen</button>
     </div>
 
-    <!-- Жестко изолированные слайдеры с уникальными массивами фото для каждой машины -->
+    <!-- Блок с отзывами клиентов (Testimonials) -->
+    <div class="testimonials-section">
+        <div class="testimonials-header">
+            <h3 id="rev-title">Kundenbewertungen</h3>
+            <p id="rev-subtitle">Was unsere Fahrgäste über uns sagen</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text" id="rev-1">"Super pünktlich, sehr sauberes Auto und ein extrem höflicher Fahrer. Der Transfer zum Flughafen verlief absolut reibungslos!"</div>
+                <div class="review-author">— Markus W. (Wien)</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text" id="rev-2">"Habe den Chauffeur für ein Geschäftstreffen stundenweise gebucht. Toller Service, absolute Diskretion und erstklassiges Fahrzeug."</div>
+                <div class="review-author">— Elena K. (Bratislava)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Изолированные слайдеры с уникальными массивами фото для каждой машины -->
     <div class="fleet-section" id="fuhrpark">
         <div class="fleet-header">
-            <h3>UNSER FUHRPARK</h3>
-            <p>Wählen Sie Ihr Wunschfahrzeug für die Fahrt</p>
+            <h3 id="fleet-title">UNSER FUHRPARK</h3>
+            <p id="fleet-subtitle">Wählen Sie Ihr Wunschfahrzeug für die Fahrt</p>
         </div>
 
         <div class="fleet-grid">
@@ -518,12 +600,12 @@
                 </div>
                 <div class="car-content">
                     <h3 class="car-title">Nissan Armada 2018</h3>
-                    <p class="car-desc">Kraftvoller Full-Size SUV mit V8-Motor, maximalem Platzangebot und Sicherheit.</p>
+                    <p class="car-desc" id="desc-armada">Kraftvoller Full-Size SUV mit V8-Motor, maximalem Platzangebot und Sicherheit.</p>
                     <ul class="car-specs">
-                        <li><span>Motor:</span> V8 Power</li>
-                        <li><span>Komfort:</span> VIP Großraum</li>
+                        <li><span id="spec-engine-1">Motor:</span> V8 Power</li>
+                        <li><span id="spec-comfort-1">Komfort:</span> VIP Großraum</li>
                     </ul>
-                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Nissan%20Armada" class="card-btn" target="_blank">Jetzt anfragen</a>
+                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Nissan%20Armada" class="card-btn car-request-btn" target="_blank">Jetzt anfragen</a>
                 </div>
             </div>
 
@@ -537,12 +619,12 @@
                 </div>
                 <div class="car-content">
                     <h3 class="car-title">Mercedes EQE 2025</h3>
-                    <p class="car-desc">Futuristische Elektro-Luxuslimousine mit herausragendem Komfort und moderner Technik.</p>
+                    <p class="car-desc" id="desc-eqe">Futuristische Elektro-Luxuslimousine mit herausragendem Komfort und moderner Technik.</p>
                     <ul class="car-specs">
-                        <li><span>Antrieb:</span> 100% Elektro</li>
-                        <li><span>Komfort:</span> Business Class</li>
+                        <li><span id="spec-engine-2">Antrieb:</span> 100% Elektro</li>
+                        <li><span id="spec-comfort-2">Komfort:</span> Business Class</li>
                     </ul>
-                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Mercedes%20EQE" class="card-btn" target="_blank">Jetzt anfragen</a>
+                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Mercedes%20EQE" class="card-btn car-request-btn" target="_blank">Jetzt anfragen</a>
                 </div>
             </div>
 
@@ -556,12 +638,12 @@
                 </div>
                 <div class="car-content">
                     <h3 class="car-title">Mercedes VLE 2026</h3>
-                    <p class="car-desc">Der Inbegriff von VIP-Shuttles. Maximaler Raum, edles Interieur und Privatsphäre.</p>
+                    <p class="car-desc" id="desc-vle">Der Inbegriff von VIP-Shuttles. Maximaler Raum, edles Interieur und Privatsphäre.</p>
                     <ul class="car-specs">
-                        <li><span>Klasse:</span> VIP Van</li>
-                        <li><span>Komfort:</span> First Class Lounge</li>
+                        <li><span id="spec-engine-3">Klasse:</span> VIP Van</li>
+                        <li><span id="spec-comfort-3">Komfort:</span> First Class Lounge</li>
                     </ul>
-                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Mercedes%20VLE" class="card-btn" target="_blank">Jetzt anfragen</a>
+                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Mercedes%20VLE" class="card-btn car-request-btn" target="_blank">Jetzt anfragen</a>
                 </div>
             </div>
 
@@ -575,12 +657,12 @@
                 </div>
                 <div class="car-content">
                     <h3 class="car-title">Tesla Model Y 2025</h3>
-                    <p class="car-desc">Voll elektrische Premium-Fahrten für höchste Ansprüche an Umweltfreundlichkeit.</p>
+                    <p class="car-desc" id="desc-tesla">Voll elektrische Premium-Fahrten für höchste Ansprüche an Umweltfreundlichkeit.</p>
                     <ul class="car-specs">
-                        <li><span>Antrieb:</span> 100% Elektro</li>
-                        <li><span>Komfort:</span> Premium VIP</li>
+                        <li><span id="spec-engine-4">Antrieb:</span> 100% Elektro</li>
+                        <li><span id="spec-comfort-4">Komfort:</span> Premium VIP</li>
                     </ul>
-                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Tesla%20Model%20Y" class="card-btn" target="_blank">Jetzt anfragen</a>
+                    <a href="https://wa.me/4368181534660?text=Hello,%20I%20would%20like%20to%20book%20the%20Tesla%20Model%20Y" class="card-btn car-request-btn" target="_blank">Jetzt anfragen</a>
                 </div>
             </div>
         </div>
@@ -639,6 +721,31 @@
             document.getElementById('img-' + carKey).src = arr[carIndexes[carKey]];
         }
 
+        // Мультивалютность
+        let currentCurrency = 'EUR';
+        const currencyRates = {
+            EUR: { symbol: '€', rate: 1.0 },
+            USD: { symbol: '$', rate: 1.1 },
+            GBP: { symbol: '£', rate: 0.85 }
+        };
+
+        function setCurrency(curr, e) {
+            document.querySelectorAll('.curr-btn').forEach(b => b.classList.remove('active'));
+            if(e) e.target.classList.add('active');
+            currentCurrency = curr;
+
+            // Обновляем ценники с data-base
+            document.querySelectorAll('.price-amount').forEach(el => {
+                const base = parseFloat(el.getAttribute('data-base'));
+                const converted = Math.round(base * currencyRates[curr].rate);
+                const prefix = el.innerText.includes('ab') || el.innerText.includes('от') || el.innerText.includes('from') ? (currentLang === 'ru' ? 'от ' : (currentLang === 'en' ? 'from ' : 'ab ')) : '';
+                el.innerText = prefix + converted + ' ' + currencyRates[curr].symbol;
+            });
+
+            // Обновляем калькулятор
+            updateCalculation();
+        }
+
         const dict = {
             de: {
                 title: "VIP Transfer Wien",
@@ -662,7 +769,13 @@
                 lblName: "Ihr Name:",
                 lblDate: "Datum & Uhrzeit:",
                 lblDetails: "Route / Bemerkung:",
-                btnFormOrder: "Jetzt verbindlich anfragen"
+                btnFormOrder: "Jetzt verbindlich anfragen",
+                revTitle: "Kundenbewertungen",
+                revSub: "Was unsere Fahrgäste über uns sagen",
+                rev1: "\"Super pünktlich, sehr sauberes Auto und ein extrem höflicher Fahrer. Der Transfer zum Flughafen verlief absolut reibungslos!\"",
+                rev2: "\"Habe den Chauffeur für ein Geschäftstreffes stundenweise gebucht. Toller Service, absolute Diskretion und erstklassiges Fahrzeug.\"",
+                fleetTitle: "UNSER FUHRPARK",
+                fleetSub: "Wählen Sie Ihr Wunschfahrzeug für die Fahrt"
             },
             en: {
                 title: "VIP Transfer Vienna",
@@ -686,11 +799,17 @@
                 lblName: "Your Name:",
                 lblDate: "Date & Time:",
                 lblDetails: "Route / Details:",
-                btnFormOrder: "Send Booking Request"
+                btnFormOrder: "Send Booking Request",
+                revTitle: "Customer Reviews",
+                revSub: "What our passengers say about us",
+                rev1: "\"Super punctual, very clean car and an extremely polite driver. The airport transfer went absolutely smoothly!\"",
+                rev2: "\"Booked the chauffeur hourly for a business meeting. Great service, absolute discretion and a first-class vehicle.\"",
+                fleetTitle: "OUR FLEET",
+                fleetSub: "Choose your preferred vehicle for the ride"
             },
             ru: {
                 title: "VIP Трансфер Вена",
-                desc: "Быстрые и комфортные поездки по Венам и окрестностям на Tesla Model Y.",
+                desc: "Быстрые и комфортные поездки по Вене и окрестностям на Tesla Model Y.",
                 luggage: "Вместимость",
                 car: "100% Электро",
                 service: "Премиум сервис",
@@ -710,7 +829,13 @@
                 lblName: "Ваше имя:",
                 lblDate: "Дата и время:",
                 lblDetails: "Маршрут / Детали:",
-                btnFormOrder: "Отправить заказ"
+                btnFormOrder: "Отправить заказ",
+                revTitle: "Отзывы клиентов",
+                revSub: "Что говорят о нас наши пассажиры",
+                rev1: "\"Супер пунктуально, очень чистая машина и вежливый водитель. Трансфер в аэропорт прошёл абсолютно идеально!\"",
+                rev2: "\"Бронировал водителя почасово для деловой поездки. Отличный сервис, полная конфиденциальность и премиальный автомобиль.\"",
+                fleetTitle: "НАШ АВТОПАРК",
+                fleetSub: "Выберите желаемый автомобиль для поездки"
             }
         };
 
@@ -736,12 +861,12 @@
             document.getElementById('t3-title').innerText = d.t3Title;
             document.getElementById('t3-sub').innerText = d.t3Sub;
 
-            document.querySelectorAll('.car-content .card-btn').forEach(b => {
-                b.innerText = lang === 'ru' ? 'Запросить' : (lang === 'en' ? 'Request' : 'Jetzt anfragen');
-            });
-
             document.querySelectorAll('.card:not(.car-card) .card-btn').forEach(b => {
                 b.innerText = d.book;
+            });
+
+            document.querySelectorAll('.car-request-btn').forEach(b => {
+                b.innerText = lang === 'ru' ? 'Запросить' : (lang === 'en' ? 'Request' : 'Jetzt anfragen');
             });
 
             document.getElementById('calc-header').innerText = d.calcHeader;
@@ -754,6 +879,17 @@
             document.getElementById('lbl-date').innerText = d.lblDate;
             document.getElementById('lbl-details').innerText = d.lblDetails;
             document.getElementById('btn-form-order').innerText = d.btnFormOrder;
+
+            document.getElementById('rev-title').innerText = d.revTitle;
+            document.getElementById('rev-subtitle').innerText = d.revSub;
+            document.getElementById('rev-1').innerText = d.rev1;
+            document.getElementById('rev-2').innerText = d.rev2;
+
+            document.getElementById('fleet-title').innerText = d.fleetTitle;
+            document.getElementById('fleet-subtitle').innerText = d.fleetSub;
+
+            // Пересчитываем валюту для правильных приставок (ab / from / от)
+            setCurrency(currentCurrency, null);
 
             document.documentElement.lang = lang;
         }
@@ -772,8 +908,9 @@
 
         function updateCalculation() {
             const select = document.getElementById('routeSelect');
-            const price = select.value;
-            document.getElementById('calcPrice').innerText = price + ' €';
+            const baseVal = parseFloat(select.value);
+            const convertedVal = Math.round(baseVal * currencyRates[currentCurrency].rate);
+            document.getElementById('calcPrice').innerText = convertedVal + ' ' + currencyRates[currentCurrency].symbol;
         }
 
         function bookCalculatedTrip() {
